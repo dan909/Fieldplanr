@@ -64,21 +64,11 @@ MakeSubPlan <- function(xopp,colse,rowse,zz="R",ori="TL") {
 #' @param zz the sup plot zig-zag. This can be rows ('R'), columns ('C'), no zig-zag columns ('NC'), or no zig-zag rows ('NR').
 #' @param ori the sup plot origin of the plot so zig-zags are correct. This can be top-left ('TL'), bottom-left ('BL'), top-right ('TR'), or bottom-right ('BR'). Not all are available for all \code{zz} options.
 #' @return A list of the posishons of the plants \code{xopp} in the \code{colse} and \code{rowse} starting at \code{ori} and zig-zaging according to \code{zz}.
+#' @param FlipR if to flip all the row numbers, use if 1,1 is at the bottom right.
 #'
 #' @examples
 #' MakeMainPlan(LETTERS[1:12],1:2,1:6,1,1)
-
-# This makes a plan
-# cols n:n columns
-# rows n:n rows
-# nr number of sub rows in a plot 1 if only one plant in a plot
-# nc number of sub columns in a plot 1 if only one plant in a plot
-# zigzag if to zig zag by column or row
-# origin place of row 1 column 1, top right = "TR" or bottom left = "BL"
-# zz if sub plots should zig zag by column or row C, R ,NC, NR
-# ori sub origin top right = "TR" or bottom left = "BL"
-# Like MakelargePlna(LETTERS[1:12],1:2,1:6,1,1)
-MakeMainPlan <- function(xopplist,rowse,colse,nr=1,nc=1,zigzag="R",origin="TL",zz="R",ori="TL") {
+MakeMainPlan <- function(xopplist,rowse,colse,nr=1,nc=1,zigzag="R",origin="TL",zz="R",ori="TL",FlipR=F) {
    Xop <- 0
    Out <- data.frame()
 
@@ -116,12 +106,17 @@ MakeMainPlan <- function(xopplist,rowse,colse,nr=1,nc=1,zigzag="R",origin="TL",z
 
    if(zigzag %in% c("C", "NC")) {colnames(Out) <- c('geno', 'col', 'row')}
 
-   Out$ROW <- ceiling(as.numeric(as.character(Out$row))/nr)
-   Out$COL <- ceiling(as.numeric(as.character(Out$col))/nc)
-   Out$Plot <- ceiling((1:nrow(Out))/(nr*nc))
+   if(FlipR) {
+      Out$row <- (max(as.numeric(as.character(Out$row)))-as.numeric(as.character(Out$row)))+1
+      Out$col <- as.numeric(as.character(Out$col))
+   } else {
+      Out$row <- as.numeric(as.character(Out$row))
+      Out$col <- as.numeric(as.character(Out$col))
+   }
 
-   Out$row <- as.numeric(as.character(Out$row))
-   Out$col <- as.numeric(as.character(Out$col))
+   Out$ROW <- ceiling(Out$row/nr)
+   Out$COL <- ceiling(Out$col/nc)
+   Out$Plot <- ceiling((1:nrow(Out))/(nr*nc))
 
    return(Out)
 }

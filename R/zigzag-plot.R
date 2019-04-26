@@ -1,6 +1,6 @@
 
 
-PlotFieldPlan <- function(List, DefaultCols = c("Mb 311" = "#000000"), SZ=1.5, TD=0, Label = "geno") {
+PlotFieldPlan <- function(List, DefaultCols = c("Mb 311" = "#000000"), SZ=1.5, TD=0, Label = "geno",FlipR=F) {
    X <- List
    X$geno <- as.character(X$geno)
    X$row <- as.numeric(as.character(X$row))
@@ -36,8 +36,12 @@ PlotFieldPlan <- function(List, DefaultCols = c("Mb 311" = "#000000"), SZ=1.5, T
            'plant' = P <- P + geom_point(size=SZ)
    )
 
+   if(FlipR) {
+      P <- P + scale_y_continuous(breaks = X$row) + scale_x_continuous(position = "top", breaks = X$col)
+   } else {
+      P <- P + scale_y_reverse(breaks = X$row) + scale_x_continuous(position = "top", breaks = X$col)
+   }
 
-   P <- P + scale_y_reverse(breaks = X$row) + scale_x_continuous(position = "top", breaks = X$col)
 
    print(P)
 }
