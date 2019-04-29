@@ -36,4 +36,5 @@ These can include subplots, in doing so this will call \code{\link{MakeSubPlan}}
 }
 \examples{
 MakeMainPlan(LETTERS[1:12],1:2,1:6,1,1)
+
 }

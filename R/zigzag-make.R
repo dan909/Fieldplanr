@@ -12,6 +12,9 @@
 #'
 #' @examples
 #' MakeSubPlan("A1", 1:3, 1:4)
+#'
+#'
+#' @export
 
 MakeSubPlan <- function(xopp,colse,rowse,zz="R",ori="TL") {
 
@@ -68,6 +71,9 @@ MakeSubPlan <- function(xopp,colse,rowse,zz="R",ori="TL") {
 #'
 #' @examples
 #' MakeMainPlan(LETTERS[1:12],1:2,1:6,1,1)
+#'
+#' @export
+
 MakeMainPlan <- function(xopplist,rowse,colse,nr=1,nc=1,zigzag="R",origin="TL",zz="R",ori="TL",FlipR=F) {
    Xop <- 0
    Out <- data.frame()

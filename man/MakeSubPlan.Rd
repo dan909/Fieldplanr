@@ -25,4 +25,6 @@ These are subplots to the main list or just a basic field setup. \code{MakeSubPl
 }
 \examples{
 MakeSubPlan("A1", 1:3, 1:4)
+
+
 }
