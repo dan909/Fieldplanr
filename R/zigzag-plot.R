@@ -49,14 +49,13 @@ PlotFieldPlan <- function(List, DefaultCols = c("Mb 311" = "#000000"), SZ=1.5, T
    P <- ggplot(X,aes(col,row, fill = geno)) + theme_bw() +
       geom_tile(show.legend = F) + scale_fill_manual(values = ColMaker(X$geno, DefaultCols))
 
-
    switch (Label,
            'geno' = P <- P + geom_text(aes(label = geno), show.legend = F, size=SZ, angle=TD),
            'loc'   = P <- P + geom_text(aes(label = paste(row,col,sep='-')), show.legend = F, size=SZ, angle=TD),
            'no' = P <- P + geom_text(aes(label = Plot), show.legend = F, size=SZ, angle=TD),
            'number' = P <- P + geom_text(aes(label = Plot), show.legend = F, size=SZ, angle=TD),
            'plant' = P <- P + geom_point(size=SZ),
-           'number' = P <- P + geom_text(aes(label = UID), show.legend = F, size=SZ, angle=TD)
+           'uid' = P <- P + geom_text(aes(label = UID), show.legend = F, size=SZ, angle=TD)
    )
 
    if(FlipR) {
