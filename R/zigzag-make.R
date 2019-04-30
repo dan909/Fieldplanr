@@ -84,7 +84,7 @@ MakeMainPlan <- function(xopplist,rowse,colse,nr=1,nc=1,zigzag="R",origin="TL",z
 
    Setup <- paste(zigzag,origin,sep = "-")
    if(!Setup %in% c("R-TL","R-BL","R-TR","R-BL","C-TL","C-BL","NR-TL","NR-BL","NC-TL")) {stop("Not valid setup yet")}
-   cat(Setup)
+   cat(paste(Setup,"\n"))
 
    if(zigzag %in% c("C", "NC")) {cols <- rowse} else {cols <- colse}
    if(zigzag %in% c("C", "NC")) {rows <- colse} else {rows <- rowse}
@@ -125,7 +125,7 @@ MakeMainPlan <- function(xopplist,rowse,colse,nr=1,nc=1,zigzag="R",origin="TL",z
    Out$COL <- ceiling(Out$col/nc)
    Out$Plot <- ceiling((1:nrow(Out))/(nr*nc))
 
-   Out$UID <- UID:(UID+nrow(Out))
+   Out$UID <- UID:(UID+nrow(Out)-1)
 
    return(Out)
 }
