@@ -4,20 +4,21 @@ loadNamespace("ggplot2")
 #'
 #' It is often needed to make minor changes (for dead plants etc.) to the output of \code{\link{MakeMainPlan}} using \code{PlotFieldPlan} is a good way to do that.
 #'
-#' @param List is the dater frame output from \code{\link{MakeMainPlan}} or something with the same hasders.
-#' @param DefaultCols are a list of key value pair sets for any pre-defigned colurs to use.
-#' @param SZ is the text sise in the graph this defalts to 1.5 but can be adjusted for large and small field plans.
-#' @param TD alows the text in the field plan to be rotated by n degrees (default = 0).
-#' @param Label the type of labeling to do on the plan. This can be nane/genotype ('geno'), plot number ('number'), location eg. 2-3 ('loc'), or just a dot ('plant').
-#' @param FlipR flips the rows (default = FALSE).
+#' @param List Is the dater frame output from \code{\link{MakeMainPlan}} or something with the same hasders.
+#' @param DefaultCols Are a list of key value pair sets for any pre-defigned colurs to use.
+#' @param SZ Is the text sise in the graph this defalts to 1.5 but can be adjusted for large and small field plans.
+#' @param TD This alows the text in the field plan to be rotated by n degrees (default = 0).
+#' @param Label The type of labeling to do on the plan. This can be nane/genotype ('geno'), plot number ('number'), location eg. 2-3 ('loc'),  just a dot ('plant'), or the UID/number of the plant ('UID').
+#' @param FlipR This flips the rows (default = FALSE).
 #'
-#' @return a  \code{ggplot2} heatmap style graph that can be saved with  \code{ggave}.
+#' @return A \code{ggplot2} heatmap style graph that can be saved with  \code{ggave}.
 #'
 #' @examples
 #' \dontrun{PlotFieldPlan(MakeMainPlan(LETTERS[1:12], 1:3, 1:4), SZ = 5)}
 #' \dontrun{PlotFieldPlan(MakeMainPlan(LETTERS[1:12], 1:3, 1:4,2,3), SZ = 3)}
 #' \dontrun{PlotFieldPlan(MakeMainPlan(LETTERS[1:12], 1:3, 1:4,2,3), SZ = 3, TD = 90, Label ='number')}
 #' \dontrun{PlotFieldPlan(MakeMainPlan(LETTERS[1:12], 1:3, 1:4,2,3), DefaultCols = c("A" = "red", "B" = "green", "C" = "blue"), SZ = 3)}
+#' \dontrun{PlotFieldPlan(MakeMainPlan(LETTERS[1:14], 1:3, 1:5,2,3), DefaultCols = c("A" = "red", "B" = "green", "C" = "blue"), SZ = 3, Label ='UID')}
 #'
 #' @export
 
@@ -29,7 +30,7 @@ PlotFieldPlan <- function(List, DefaultCols = c("Mb 311" = "#000000"), SZ=1.5, T
    X$geno[X$geno %in% c("X","NA"," ")] <- NA
 
    Label <- casefold(Label)
-   if(!Label %in% c("geno", "number", "no", "loc", 'plant')) {stop("Not a valid Label")}
+   if(!Label %in% c("geno", "number", "no", "loc", 'plant', 'uid')) {stop("Not a valid Label")}
 
    require(ggplot2)
 
@@ -54,7 +55,8 @@ PlotFieldPlan <- function(List, DefaultCols = c("Mb 311" = "#000000"), SZ=1.5, T
            'loc'   = P <- P + geom_text(aes(label = paste(row,col,sep='-')), show.legend = F, size=SZ, angle=TD),
            'no' = P <- P + geom_text(aes(label = Plot), show.legend = F, size=SZ, angle=TD),
            'number' = P <- P + geom_text(aes(label = Plot), show.legend = F, size=SZ, angle=TD),
-           'plant' = P <- P + geom_point(size=SZ)
+           'plant' = P <- P + geom_point(size=SZ),
+           'number' = P <- P + geom_text(aes(label = UID), show.legend = F, size=SZ, angle=TD)
    )
 
    if(FlipR) {
@@ -75,18 +77,18 @@ PlotFieldPlan <- function(List, DefaultCols = c("Mb 311" = "#000000"), SZ=1.5, T
 #'
 #' It is often needed to make minor changes (for dead plants etc.) to the output of \code{\link{MakeMainPlan}} using \code{PlotFieldPlan} is a good way to do that.
 #'
-#' @param List is the dater frame output from \code{\link{MakeMainPlan}} or something with the same hasders.
-#' @param rowPlantSpacing spacing normaly in m between plants in each row.
-#' @param colPlantSpacing spacing normaly in m between plants in each column.
-#' @param rowBlockSapcing if there are blocks this is the spacing betwean there rows.
-#' @param colBlockSapcing if there are blocks this is the spacing betwean there rows.
-#' @param rowBlockFreq there is a new block every n rows of plants.
-#' @param colBlockFreq there is a new block every n columns of plants.
-#' @param DefaultCols are a list of key value pair sets for any pre-defigned colurs to use.
-#' @param SZ is the text sise in the graph this defalts to 1.5 but can be adjusted for large and small field plans.
-#' @param TD alows the text in the field plan to be rotated by n degrees (default = 0).
+#' @param List Is the dater frame output from \code{\link{MakeMainPlan}} or something with the same hasders.
+#' @param rowPlantSpacing Spacing normaly in m between plants in each row.
+#' @param colPlantSpacing Spacing normaly in m between plants in each column.
+#' @param rowBlockSapcing If there are blocks this is the spacing betwean there rows.
+#' @param colBlockSapcing If there are blocks this is the spacing betwean there rows.
+#' @param rowBlockFreq There is a new block every n rows of plants.
+#' @param colBlockFreq There is a new block every n columns of plants.
+#' @param DefaultCols Are a list of key value pair sets for any pre-defigned colurs to use.
+#' @param SZ This is the text sise in the graph this defalts to 1.5 but can be adjusted for large and small field plans.
+#' @param TD This alows the text in the field plan to be rotated by n degrees (default = 0).
 #'
-#' @return a  \code{ggplot2} heatmap style graph that can be saved with \code{ggave}. This shows the spaceing of all of the plants.
+#' @return A  \code{ggplot2} heatmap style graph that can be saved with \code{ggave}. This shows the spaceing of all of the plants.
 #'
 #' @examples
 #' \dontrun{PlotFieldPlanAdvanced(MakeMainPlan(LETTERS[1:12], 1:3, 1:4), SZ = 5)}

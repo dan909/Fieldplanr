@@ -3,11 +3,11 @@
 #'
 #' These are subplots to the main list or just a basic field setup. \code{MakeSubPlan} is called by \code{\link{MakeMainPlan}}.
 #'
-#' @param xopp is the name of the genotype clone etc.
-#' @param colse the columns in the field this clone is in eg 1 to 7 (1:7) or 3 to 5 (3:5).
-#' @param rowse the rows in the field this clone in in eg 1 to 5 (1:5) or 2 to 6 (2:6).
-#' @param zz the zig-zag. This can be rows ('R'), columns ('C'), no zig-zag columns ('NC'), or no zig-zag rows ('NR').
-#' @param ori the origin of the plot so zig-zags are correct. This can be top-left ('TL'), bottom-left ('BL'), top-right ('TR'), or bottom-right ('BR'). Not all are available for all \code{zz} options.
+#' @param xopp Is the name of the genotype clone etc.
+#' @param colse The columns in the field this clone is in eg 1 to 7 (1:7) or 3 to 5 (3:5).
+#' @param rowse The rows in the field this clone in in eg 1 to 5 (1:5) or 2 to 6 (2:6).
+#' @param zz The zig-zag. This can be rows ('R'), columns ('C'), no zig-zag columns ('NC'), or no zig-zag rows ('NR').
+#' @param ori The origin of the plot so zig-zags are correct. This can be top-left ('TL'), bottom-left ('BL'), top-right ('TR'), or bottom-right ('BR'). Not all are available for all \code{zz} options.
 #' @return A list of the posishons of the plants \code{xopp} in the \code{colse} and \code{rowse} starting at \code{ori} and zig-zaging according to \code{zz}.
 #'
 #' @examples
@@ -59,22 +59,23 @@ MakeSubPlan <- function(xopp,colse,rowse,zz="R",ori="TL") {
 #'
 #' @param xopplist is the name of the genotype clone etc.
 #' @param rowse the columns in the field n:n eg 1 to 7 (1:7) or 1 to 5 (1:5). This should normaly start at 1.
-#' @param colse the rows in the field n:n eg 1 to 5 (1:5) or 1 to 6 (1:6).  This should normaly start at 1.
-#' @param nr the number of rows in the sub plots.
-#' @param nc the number of columns in the sub plots.
-#' @param zigzag the zig-zag. This can be rows ('R'), columns ('C'), no zig-zag columns ('NC'), or no zig-zag rows ('NR').
-#' @param origin the origin of the plot so zig-zags are correct. This can be top-left ('TL'), bottom-left ('BL'), top-right ('TR'), or bottom-right ('BR'). Not all are available for all \code{zz} options.
-#' @param zz the sup plot zig-zag. This can be rows ('R'), columns ('C'), no zig-zag columns ('NC'), or no zig-zag rows ('NR').
-#' @param ori the sup plot origin of the plot so zig-zags are correct. This can be top-left ('TL'), bottom-left ('BL'), top-right ('TR'), or bottom-right ('BR'). Not all are available for all \code{zz} options.
+#' @param colse The rows in the field n:n eg 1 to 5 (1:5) or 1 to 6 (1:6).  This should normaly start at 1.
+#' @param nr The number of rows in the sub plots.
+#' @param nc The number of columns in the sub plots.
+#' @param zigzag The zig-zag. This can be rows ('R'), columns ('C'), no zig-zag columns ('NC'), or no zig-zag rows ('NR').
+#' @param origin The origin of the plot so zig-zags are correct. This can be top-left ('TL'), bottom-left ('BL'), top-right ('TR'), or bottom-right ('BR'). Not all are available for all \code{zz} options.
+#' @param zz The sup plot zig-zag. This can be rows ('R'), columns ('C'), no zig-zag columns ('NC'), or no zig-zag rows ('NR').
+#' @param ori The sup plot origin of the plot so zig-zags are correct. This can be top-left ('TL'), bottom-left ('BL'), top-right ('TR'), or bottom-right ('BR'). Not all are available for all \code{zz} options.
 #' @return A list of the posishons of the plants \code{xopp} in the \code{colse} and \code{rowse} starting at \code{ori} and zig-zaging according to \code{zz}.
-#' @param FlipR if to flip all the row numbers, use if 1,1 is at the bottom right.
+#' @param FlipR If to flip all the row numbers, use if 1,1 is at the bottom right.
+#' @param UID The UID for the first plant.
 #'
 #' @examples
 #' MakeMainPlan(LETTERS[1:12],1:2,1:6,1,1)
 #'
 #' @export
 
-MakeMainPlan <- function(xopplist,rowse,colse,nr=1,nc=1,zigzag="R",origin="TL",zz="R",ori="TL",FlipR=F) {
+MakeMainPlan <- function(xopplist,rowse,colse,nr=1,nc=1,zigzag="R",origin="TL",zz="R",ori="TL",FlipR=F,UID=1) {
    Xop <- 0
    Out <- data.frame()
 
@@ -123,6 +124,8 @@ MakeMainPlan <- function(xopplist,rowse,colse,nr=1,nc=1,zigzag="R",origin="TL",z
    Out$ROW <- ceiling(Out$row/nr)
    Out$COL <- ceiling(Out$col/nc)
    Out$Plot <- ceiling((1:nrow(Out))/(nr*nc))
+
+   OUT$UID <- UID:(UID+nrow(Out))
 
    return(Out)
 }
