@@ -8,20 +8,20 @@ PlotFieldPlan(List, DefaultCols = c(`Mb 311` = "#000000"), SZ = 1.5,
   TD = 0, Label = "geno", FlipR = FALSE)
 }
 \arguments{
-\item{List}{is the dater frame output from \code{\link{MakeMainPlan}} or something with the same hasders.}
+\item{List}{Is the dater frame output from \code{\link{MakeMainPlan}} or something with the same hasders.}
 
-\item{DefaultCols}{are a list of key value pair sets for any pre-defigned colurs to use.}
+\item{DefaultCols}{Are a list of key value pair sets for any pre-defigned colurs to use.}
 
-\item{SZ}{is the text sise in the graph this defalts to 1.5 but can be adjusted for large and small field plans.}
+\item{SZ}{Is the text sise in the graph this defalts to 1.5 but can be adjusted for large and small field plans.}
 
-\item{TD}{alows the text in the field plan to be rotated by n degrees (default = 0).}
+\item{TD}{This alows the text in the field plan to be rotated by n degrees (default = 0).}
 
-\item{Label}{the type of labeling to do on the plan. This can be nane/genotype ('geno'), plot number ('number'), location eg. 2-3 ('loc'), or just a dot ('plant').}
+\item{Label}{The type of labeling to do on the plan. This can be nane/genotype ('geno'), plot number ('number'), location eg. 2-3 ('loc'),  just a dot ('plant'), or the UID/number of the plant ('UID').}
 
-\item{FlipR}{flips the rows (default = FALSE).}
+\item{FlipR}{This flips the rows (default = FALSE).}
 }
 \value{
-a  \code{ggplot2} heatmap style graph that can be saved with  \code{ggave}.
+A \code{ggplot2} heatmap style graph that can be saved with  \code{ggave}.
 }
 \description{
 It is often needed to make minor changes (for dead plants etc.) to the output of \code{\link{MakeMainPlan}} using \code{PlotFieldPlan} is a good way to do that.
@@ -31,5 +31,6 @@ It is often needed to make minor changes (for dead plants etc.) to the output of
 \dontrun{PlotFieldPlan(MakeMainPlan(LETTERS[1:12], 1:3, 1:4,2,3), SZ = 3)}
 \dontrun{PlotFieldPlan(MakeMainPlan(LETTERS[1:12], 1:3, 1:4,2,3), SZ = 3, TD = 90, Label ='number')}
 \dontrun{PlotFieldPlan(MakeMainPlan(LETTERS[1:12], 1:3, 1:4,2,3), DefaultCols = c("A" = "red", "B" = "green", "C" = "blue"), SZ = 3)}
+\dontrun{PlotFieldPlan(MakeMainPlan(LETTERS[1:14], 1:3, 1:5,2,3), DefaultCols = c("A" = "red", "B" = "green", "C" = "blue"), SZ = 3, Label ='UID')}
 
 }

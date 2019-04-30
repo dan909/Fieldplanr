@@ -5,28 +5,30 @@
 \title{Makes a set of plots from a list of genotypes.}
 \usage{
 MakeMainPlan(xopplist, rowse, colse, nr = 1, nc = 1, zigzag = "R",
-  origin = "TL", zz = "R", ori = "TL", FlipR = F)
+  origin = "TL", zz = "R", ori = "TL", FlipR = F, UID = 1)
 }
 \arguments{
 \item{xopplist}{is the name of the genotype clone etc.}
 
 \item{rowse}{the columns in the field n:n eg 1 to 7 (1:7) or 1 to 5 (1:5). This should normaly start at 1.}
 
-\item{colse}{the rows in the field n:n eg 1 to 5 (1:5) or 1 to 6 (1:6).  This should normaly start at 1.}
+\item{colse}{The rows in the field n:n eg 1 to 5 (1:5) or 1 to 6 (1:6).  This should normaly start at 1.}
 
-\item{nr}{the number of rows in the sub plots.}
+\item{nr}{The number of rows in the sub plots.}
 
-\item{nc}{the number of columns in the sub plots.}
+\item{nc}{The number of columns in the sub plots.}
 
-\item{zigzag}{the zig-zag. This can be rows ('R'), columns ('C'), no zig-zag columns ('NC'), or no zig-zag rows ('NR').}
+\item{zigzag}{The zig-zag. This can be rows ('R'), columns ('C'), no zig-zag columns ('NC'), or no zig-zag rows ('NR').}
 
-\item{origin}{the origin of the plot so zig-zags are correct. This can be top-left ('TL'), bottom-left ('BL'), top-right ('TR'), or bottom-right ('BR'). Not all are available for all \code{zz} options.}
+\item{origin}{The origin of the plot so zig-zags are correct. This can be top-left ('TL'), bottom-left ('BL'), top-right ('TR'), or bottom-right ('BR'). Not all are available for all \code{zz} options.}
 
-\item{zz}{the sup plot zig-zag. This can be rows ('R'), columns ('C'), no zig-zag columns ('NC'), or no zig-zag rows ('NR').}
+\item{zz}{The sup plot zig-zag. This can be rows ('R'), columns ('C'), no zig-zag columns ('NC'), or no zig-zag rows ('NR').}
 
-\item{ori}{the sup plot origin of the plot so zig-zags are correct. This can be top-left ('TL'), bottom-left ('BL'), top-right ('TR'), or bottom-right ('BR'). Not all are available for all \code{zz} options.}
+\item{ori}{The sup plot origin of the plot so zig-zags are correct. This can be top-left ('TL'), bottom-left ('BL'), top-right ('TR'), or bottom-right ('BR'). Not all are available for all \code{zz} options.}
 
-\item{FlipR}{if to flip all the row numbers, use if 1,1 is at the bottom right.}
+\item{FlipR}{If to flip all the row numbers, use if 1,1 is at the bottom right.}
+
+\item{UID}{The UID for the first plant.}
 }
 \value{
 A list of the posishons of the plants \code{xopp} in the \code{colse} and \code{rowse} starting at \code{ori} and zig-zaging according to \code{zz}.

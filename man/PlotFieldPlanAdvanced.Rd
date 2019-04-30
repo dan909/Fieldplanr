@@ -10,28 +10,28 @@ PlotFieldPlanAdvanced(List, rowPlantSpacing = 0.66,
   DefaultCols = c(`Mb 311` = "#000000"), SZ = 1.5, TD = 0)
 }
 \arguments{
-\item{List}{is the dater frame output from \code{\link{MakeMainPlan}} or something with the same hasders.}
+\item{List}{Is the dater frame output from \code{\link{MakeMainPlan}} or something with the same hasders.}
 
-\item{rowPlantSpacing}{spacing normaly in m between plants in each row.}
+\item{rowPlantSpacing}{Spacing normaly in m between plants in each row.}
 
-\item{colPlantSpacing}{spacing normaly in m between plants in each column.}
+\item{colPlantSpacing}{Spacing normaly in m between plants in each column.}
 
-\item{rowBlockSapcing}{if there are blocks this is the spacing betwean there rows.}
+\item{rowBlockSapcing}{If there are blocks this is the spacing betwean there rows.}
 
-\item{colBlockSapcing}{if there are blocks this is the spacing betwean there rows.}
+\item{colBlockSapcing}{If there are blocks this is the spacing betwean there rows.}
 
-\item{rowBlockFreq}{there is a new block every n rows of plants.}
+\item{rowBlockFreq}{There is a new block every n rows of plants.}
 
-\item{colBlockFreq}{there is a new block every n columns of plants.}
+\item{colBlockFreq}{There is a new block every n columns of plants.}
 
-\item{DefaultCols}{are a list of key value pair sets for any pre-defigned colurs to use.}
+\item{DefaultCols}{Are a list of key value pair sets for any pre-defigned colurs to use.}
 
-\item{SZ}{is the text sise in the graph this defalts to 1.5 but can be adjusted for large and small field plans.}
+\item{SZ}{This is the text sise in the graph this defalts to 1.5 but can be adjusted for large and small field plans.}
 
-\item{TD}{alows the text in the field plan to be rotated by n degrees (default = 0).}
+\item{TD}{This alows the text in the field plan to be rotated by n degrees (default = 0).}
 }
 \value{
-a  \code{ggplot2} heatmap style graph that can be saved with \code{ggave}. This shows the spaceing of all of the plants.
+A  \code{ggplot2} heatmap style graph that can be saved with \code{ggave}. This shows the spaceing of all of the plants.
 }
 \description{
 It is often needed to make minor changes (for dead plants etc.) to the output of \code{\link{MakeMainPlan}} using \code{PlotFieldPlan} is a good way to do that.
