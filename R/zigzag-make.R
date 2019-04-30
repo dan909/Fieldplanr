@@ -125,7 +125,7 @@ MakeMainPlan <- function(xopplist,rowse,colse,nr=1,nc=1,zigzag="R",origin="TL",z
    Out$COL <- ceiling(Out$col/nc)
    Out$Plot <- ceiling((1:nrow(Out))/(nr*nc))
 
-   OUT$UID <- UID:(UID+nrow(Out))
+   Out$UID <- UID:(UID+nrow(Out))
 
    return(Out)
 }
