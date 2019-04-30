@@ -1,7 +1,7 @@
 Package: Fieldplanr
 Type: Package
 Title: This Package Makes Field Plans
-Version: 0.1.0
+Version: 0.1.2
 Author: Danny Awty-Carroll
 Maintainer: Danny Awty-Carroll <dga1@aber.ac.uk>
 Description: This packige alows a list of plants to be made into different types of field plan, both output as text and graphs. This is able to make single plans or blocks and can have paths in the field.
