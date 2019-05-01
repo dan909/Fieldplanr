@@ -7,7 +7,8 @@
 PlotFieldPlanAdvanced(List, rowPlantSpacing = 0.66,
   colPlantSpacing = 0.75, rowBlockSapcing = 0.66,
   colBlockSapcing = 0.75, rowBlockFreq = 15, colBlockFreq = 4,
-  DefaultCols = c(`Mb 311` = "#000000"), SZ = 1.5, TD = 0)
+  DefaultCols = c(`Mb 311` = "#000000"), SZ = 1.5, TD = 0,
+  FlipR = FALSE)
 }
 \arguments{
 \item{List}{Is the dater frame output from \code{\link{MakeMainPlan}} or something with the same hasders.}
@@ -29,6 +30,8 @@ PlotFieldPlanAdvanced(List, rowPlantSpacing = 0.66,
 \item{SZ}{This is the text sise in the graph this defalts to 1.5 but can be adjusted for large and small field plans.}
 
 \item{TD}{This alows the text in the field plan to be rotated by n degrees (default = 0).}
+
+\item{FlipR}{This flips the rows (default = FALSE).}
 }
 \value{
 A  \code{ggplot2} heatmap style graph that can be saved with \code{ggave}. This shows the spaceing of all of the plants.

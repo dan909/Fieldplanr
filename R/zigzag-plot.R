@@ -86,6 +86,8 @@ PlotFieldPlan <- function(List, DefaultCols = c("Mb 311" = "#000000"), SZ=1.5, T
 #' @param DefaultCols Are a list of key value pair sets for any pre-defigned colurs to use.
 #' @param SZ This is the text sise in the graph this defalts to 1.5 but can be adjusted for large and small field plans.
 #' @param TD This alows the text in the field plan to be rotated by n degrees (default = 0).
+#' @param FlipR This flips the rows (default = FALSE).
+#'
 #'
 #' @return A  \code{ggplot2} heatmap style graph that can be saved with \code{ggave}. This shows the spaceing of all of the plants.
 #'
@@ -95,7 +97,7 @@ PlotFieldPlan <- function(List, DefaultCols = c("Mb 311" = "#000000"), SZ=1.5, T
 #'
 #' @export
 
-PlotFieldPlanAdvanced <- function(List, rowPlantSpacing = 0.66, colPlantSpacing = 0.75, rowBlockSapcing = 0.66, colBlockSapcing = 0.75, rowBlockFreq = 15, colBlockFreq = 4, DefaultCols = c("Mb 311" = "#000000"), SZ=1.5, TD=0) {
+PlotFieldPlanAdvanced <- function(List, rowPlantSpacing = 0.66, colPlantSpacing = 0.75, rowBlockSapcing = 0.66, colBlockSapcing = 0.75, rowBlockFreq = 15, colBlockFreq = 4, DefaultCols = c("Mb 311" = "#000000"), SZ=1.5, TD=0,FlipR=FALSE) {
 
    X <- List
    X$geno <- as.character(X$geno)
@@ -153,10 +155,9 @@ PlotFieldPlanAdvanced <- function(List, rowPlantSpacing = 0.66, colPlantSpacing 
    ColSpacings <- unique(ColSpacings)
 
 
-   ggplot(X,aes(Xpos,Ypos, fill = geno)) + theme_bw() +
+   P <- ggplot(X,aes(Xpos,Ypos, fill = geno)) + theme_bw() +
       geom_tile(show.legend = F) + geom_text(aes(label = geno), show.legend = F, size=SZ, angle=TD) +
-      scale_fill_manual(values = ColMaker(X$geno, DefaultCols)) +
-      scale_y_reverse(breaks = RowSpacings, expand = c(0, 0)) + ylab("") + xlab("") +
+      scale_fill_manual(values = ColMaker(X$geno, DefaultCols)) + ylab("") + xlab("") +
       scale_x_continuous(position = "top", breaks = ColSpacings, expand = c(0, 0)) +
       theme(axis.text.x = element_text(angle=90, hjust=1)) +
       theme(panel.grid.major.x = element_blank()) + geom_hline(yintercept = 0) +
@@ -164,5 +165,11 @@ PlotFieldPlanAdvanced <- function(List, rowPlantSpacing = 0.66, colPlantSpacing 
       theme(panel.grid.major.y = element_blank()) + geom_vline(xintercept = 0) +
       geom_vline(xintercept = max(ColSpacings)+colPlantSpacing)
 
+   if (FlipR) {
+      P <- P + scale_y_reverse(breaks = RowSpacings, expand = c(0, 0))
+   } else {
+      P <- P + scale_y_continuous(breaks = RowSpacings, expand = c(0, 0))
+   }
+   return(P)
 }
 
