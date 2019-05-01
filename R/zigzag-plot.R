@@ -59,9 +59,9 @@ PlotFieldPlan <- function(List, DefaultCols = c("Mb 311" = "#000000"), SZ=1.5, T
    )
 
    if(FlipR) {
-      P <- P + scale_y_continuous(breaks = X$row) + scale_x_continuous(position = "top", breaks = X$col)
+      P <- P + scale_y_continuous(breaks = X$row, expand = c(0, 0)) + scale_x_continuous(position = "top", breaks = X$col, expand = c(0, 0))
    } else {
-      P <- P + scale_y_reverse(breaks = X$row) + scale_x_continuous(position = "top", breaks = X$col)
+      P <- P + scale_y_reverse(breaks = X$row, expand = c(0, 0)) + scale_x_continuous(position = "top", breaks = X$col, expand = c(0, 0))
    }
 
 
@@ -155,8 +155,8 @@ PlotFieldPlanAdvanced <- function(List, rowPlantSpacing = 0.66, colPlantSpacing 
    ggplot(X,aes(Xpos,Ypos, fill = geno)) + theme_bw() +
       geom_tile(show.legend = F) + geom_text(aes(label = geno), show.legend = F, size=SZ, angle=TD) +
       scale_fill_manual(values = ColMaker(X$geno, DefaultCols)) +
-      scale_y_reverse(breaks = RowSpacings) + ylab("") + xlab("") +
-      scale_x_continuous(position = "top", breaks = ColSpacings) +
+      scale_y_reverse(breaks = RowSpacings, expand = c(0, 0)) + ylab("") + xlab("") +
+      scale_x_continuous(position = "top", breaks = ColSpacings, expand = c(0, 0)) +
       theme(axis.text.x = element_text(angle=90, hjust=1)) +
       theme(panel.grid.major.x = element_blank()) + geom_hline(yintercept = 0) +
       geom_hline(yintercept = max(RowSpacings)+rowPlantSpacing) +
