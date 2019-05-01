@@ -129,7 +129,7 @@ PlotFieldPlanAdvanced <- function(List, rowPlantSpacing = 0.66, colPlantSpacing 
          }
       }
       Space <- Space-(PlantSpacing/2)
-      return(Space-PlantSpacing/2)
+      return(Space)
    }
 
 
