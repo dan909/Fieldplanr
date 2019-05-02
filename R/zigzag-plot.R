@@ -123,7 +123,15 @@ PlotFieldPlanAdvanced <- function(List, rowPlantSpacing = 0.66, colPlantSpacing 
 
 
    MakeSpace <- function(pos, BlockFreq, BlockSapcing, PlantSpacing) {
-      Space <- pos*PlantSpacing
+      if(length(PlantSpacing)>1){
+         ps <- PlantSpacing[pos]
+         Space <- sum(PlantSpacing[1:pos])
+      } else {
+         ps <- PlantSpacing
+         Space <- pos*PlantSpacing
+      }
+
+
       if(length(BlockSapcing)==1) {
          if(pos > BlockFreq) {Space <- Space + (floor((pos-1)/BlockFreq)*BlockSapcing)}
       } else {
@@ -132,7 +140,7 @@ PlotFieldPlanAdvanced <- function(List, rowPlantSpacing = 0.66, colPlantSpacing 
             Space <- Space + sum(BlockSapce)
          }
       }
-      Space <- Space-(PlantSpacing/2)
+      Space <- Space-(ps/2)
       return(Space)
    }
 
@@ -157,12 +165,27 @@ PlotFieldPlanAdvanced <- function(List, rowPlantSpacing = 0.66, colPlantSpacing 
    ColSpacings <- unique(ColSpacings)
 
 
-   P <- ggplot(X,aes(Xpos,Ypos, fill = geno)) + theme_bw() +
-      geom_tile(show.legend = F) + geom_text(aes(label = geno), show.legend = F, size=SZ, angle=TD) +
-      scale_fill_manual(values = ColMaker(X$geno, DefaultCols)) + ylab("") + xlab("") +
-      theme(axis.text.x = element_text(angle=90, hjust=1)) +
-      theme(panel.grid.major.x = element_blank()) + geom_hline(yintercept = 0) +
-      theme(panel.grid.major.y = element_blank()) + geom_vline(xintercept = 0)
+   P <- ggplot(X,aes(Xpos,Ypos, fill = geno)) + theme_bw()
+
+   if(length(rowPlantSpacing)>1 | length(colPlantSpacing)>1) {
+      RowLines <- c(RowSpacings-(rowPlantSpacing/2),RowSpacings+(rowPlantSpacing/2))
+      ColLines <- c(ColSpacings-(colPlantSpacing/2),ColSpacings+(colPlantSpacing/2))
+      print(ColLines)
+      P <- P + geom_text(aes(label = geno), show.legend = F, size=SZ, angle=TD) +
+         ylab("") + xlab("") + geom_hline(yintercept = RowLines) +
+         geom_vline(xintercept = ColLines) +
+         theme(axis.text.x = element_text(angle=90, hjust=1)) +
+         theme(panel.grid.major.x = element_blank()) + geom_hline(yintercept = 0) +
+         theme(panel.grid.major.y = element_blank()) + geom_vline(xintercept = 0)
+   } else {
+      P <- P + geom_tile(show.legend = F) +
+         geom_text(aes(label = geno), show.legend = F, size=SZ, angle=TD) +
+         scale_fill_manual(values = ColMaker(X$geno, DefaultCols)) + ylab("") + xlab("") +
+         theme(axis.text.x = element_text(angle=90, hjust=1)) +
+         theme(panel.grid.major.x = element_blank()) + geom_hline(yintercept = 0) +
+         theme(panel.grid.major.y = element_blank()) + geom_vline(xintercept = 0)
+   }
+
 
 
    if (!PlantPos) {
