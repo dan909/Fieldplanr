@@ -4,11 +4,11 @@
 #' These are subplots to the main list or just a basic field setup. \code{MakeSubPlan} is called by \code{\link{MakeMainPlan}}.
 #'
 #' @param xopp Is the name of the genotype clone etc.
-#' @param colse The columns in the field this clone is in eg 1 to 7 (1:7) or 3 to 5 (3:5).
-#' @param rowse The rows in the field this clone in in eg 1 to 5 (1:5) or 2 to 6 (2:6).
+#' @param colse The columns in the field this clone is in e.g. 1 to 7 (1:7) or 3 to 5 (3:5).
+#' @param rowse The rows in the field this clone in in e.g. 1 to 5 (1:5) or 2 to 6 (2:6).
 #' @param zz The zig-zag. This can be rows ('R'), columns ('C'), no zig-zag columns ('NC'), or no zig-zag rows ('NR').
 #' @param ori The origin of the plot so zig-zags are correct. This can be top-left ('TL'), bottom-left ('BL'), top-right ('TR'), or bottom-right ('BR'). Not all are available for all \code{zz} options.
-#' @return A list of the posishons of the plants \code{xopp} in the \code{colse} and \code{rowse} starting at \code{ori} and zig-zaging according to \code{zz}.
+#' @return A list of the positions of the plants \code{xopp} in the \code{colse} and \code{rowse} starting at \code{ori} and zig-zagging according to \code{zz}.
 #'
 #' @examples
 #' MakeSubPlan("A1", 1:3, 1:4)
@@ -55,18 +55,18 @@ MakeSubPlan <- function(xopp,colse,rowse,zz="R",ori="TL") {
 
 #' Makes a set of plots from a list of genotypes.
 #'
-#' These can include subplots, in doing so this will call \code{\link{MakeSubPlan}} to make the subplots. Any sub plots can have difering zig-zags and origins dfinde in \code{zz} is called by \code{ori}.
+#' These can include subplots, in doing so this will call \code{\link{MakeSubPlan}} to make the subplots. Any sub plots can have differing zig-zags and origins defined in \code{zz} is called by \code{ori}.
 #'
 #' @param xopplist is the name of the genotype clone etc.
-#' @param rowse the columns in the field n:n eg 1 to 7 (1:7) or 1 to 5 (1:5). This should normaly start at 1.
-#' @param colse The rows in the field n:n eg 1 to 5 (1:5) or 1 to 6 (1:6).  This should normaly start at 1.
+#' @param rowse the columns in the field n:n e.g. 1 to 7 (1:7) or 1 to 5 (1:5). This should typically start at 1.
+#' @param colse The rows in the field n:n eg 1 to 5 (1:5) or 1 to 6 (1:6).  This should typically start at 1.
 #' @param nr The number of rows in the sub plots.
 #' @param nc The number of columns in the sub plots.
 #' @param zigzag The zig-zag. This can be rows ('R'), columns ('C'), no zig-zag columns ('NC'), or no zig-zag rows ('NR').
 #' @param origin The origin of the plot so zig-zags are correct. This can be top-left ('TL'), bottom-left ('BL'), top-right ('TR'), or bottom-right ('BR'). Not all are available for all \code{zz} options.
 #' @param zz The sup plot zig-zag. This can be rows ('R'), columns ('C'), no zig-zag columns ('NC'), or no zig-zag rows ('NR').
 #' @param ori The sup plot origin of the plot so zig-zags are correct. This can be top-left ('TL'), bottom-left ('BL'), top-right ('TR'), or bottom-right ('BR'). Not all are available for all \code{zz} options.
-#' @return A list of the posishons of the plants \code{xopp} in the \code{colse} and \code{rowse} starting at \code{ori} and zig-zaging according to \code{zz}.
+#' @return A list of the posishons of the plants \code{xopp} in the \code{colse} and \code{rowse} starting at \code{ori} and zig-zagging according to \code{zz}.
 #' @param FlipR If to flip all the row numbers, use if 1,1 is at the bottom right.
 #' @param UID The UID for the first plant.
 #'

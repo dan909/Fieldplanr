@@ -9,16 +9,16 @@ MakeSubPlan(xopp, colse, rowse, zz = "R", ori = "TL")
 \arguments{
 \item{xopp}{Is the name of the genotype clone etc.}
 
-\item{colse}{The columns in the field this clone is in eg 1 to 7 (1:7) or 3 to 5 (3:5).}
+\item{colse}{The columns in the field this clone is in e.g. 1 to 7 (1:7) or 3 to 5 (3:5).}
 
-\item{rowse}{The rows in the field this clone in in eg 1 to 5 (1:5) or 2 to 6 (2:6).}
+\item{rowse}{The rows in the field this clone in in e.g. 1 to 5 (1:5) or 2 to 6 (2:6).}
 
 \item{zz}{The zig-zag. This can be rows ('R'), columns ('C'), no zig-zag columns ('NC'), or no zig-zag rows ('NR').}
 
 \item{ori}{The origin of the plot so zig-zags are correct. This can be top-left ('TL'), bottom-left ('BL'), top-right ('TR'), or bottom-right ('BR'). Not all are available for all \code{zz} options.}
 }
 \value{
-A list of the posishons of the plants \code{xopp} in the \code{colse} and \code{rowse} starting at \code{ori} and zig-zaging according to \code{zz}.
+A list of the positions of the plants \code{xopp} in the \code{colse} and \code{rowse} starting at \code{ori} and zig-zagging according to \code{zz}.
 }
 \description{
 These are subplots to the main list or just a basic field setup. \code{MakeSubPlan} is called by \code{\link{MakeMainPlan}}.

@@ -2,45 +2,49 @@
 % Please edit documentation in R/zigzag-plot.R
 \name{PlotFieldPlanAdvanced}
 \alias{PlotFieldPlanAdvanced}
-\title{Makes a more advanced diagram from the output of \code{\link{MakeMainPlan}} that can show path spaceings.}
+\title{Makes a more advanced diagram from the output of \code{\link{MakeMainPlan}} that can show path spacing.}
 \usage{
 PlotFieldPlanAdvanced(List, rowPlantSpacing = 0.66,
   colPlantSpacing = 0.75, rowBlockSapcing = 0.66,
   colBlockSapcing = 0.75, rowBlockFreq = 15, colBlockFreq = 4,
   DefaultCols = c(`Mb 311` = "#000000"), SZ = 1.5, TD = 0,
-  FlipR = FALSE)
+  FlipR = FALSE, PlantPos = TRUE)
 }
 \arguments{
-\item{List}{Is the dater frame output from \code{\link{MakeMainPlan}} or something with the same hasders.}
+\item{List}{Is the dater frame output from \code{\link{MakeMainPlan}} or something with the same handers.}
 
-\item{rowPlantSpacing}{Spacing normaly in m between plants in each row.}
+\item{rowPlantSpacing}{Spacing typically in m between plants in each row.}
 
-\item{colPlantSpacing}{Spacing normaly in m between plants in each column.}
+\item{colPlantSpacing}{Spacing typically in m between plants in each column.}
 
-\item{rowBlockSapcing}{If there are blocks this is the spacing betwean there rows.}
+\item{rowBlockSapcing}{If there are blocks this is the spacing between there rows. This can be a list if it is the same length as the number of expected row paths.}
 
-\item{colBlockSapcing}{If there are blocks this is the spacing betwean there rows.}
+\item{colBlockSapcing}{If there are blocks this is the spacing between there columns. This can be a list if it is the same length as the number of expected column paths.}
 
 \item{rowBlockFreq}{There is a new block every n rows of plants.}
 
 \item{colBlockFreq}{There is a new block every n columns of plants.}
 
-\item{DefaultCols}{Are a list of key value pair sets for any pre-defigned colurs to use.}
+\item{DefaultCols}{Are a list of key value pair sets for any pre-defined colures to use.}
 
-\item{SZ}{This is the text sise in the graph this defalts to 1.5 but can be adjusted for large and small field plans.}
+\item{SZ}{This is the text size in the graph this defaults to 1.5 but can be adjusted for large and small field plans.}
 
-\item{TD}{This alows the text in the field plan to be rotated by n degrees (default = 0).}
+\item{TD}{This allows the text in the field plan to be rotated by n degrees (default = 0).}
 
 \item{FlipR}{This flips the rows (default = FALSE).}
+
+\item{PlantPos}{This sets if to label the plant or the plot in the tick marks.}
 }
 \value{
-A  \code{ggplot2} heatmap style graph that can be saved with \code{ggave}. This shows the spaceing of all of the plants.
+A  \code{ggplot2} heatmap style graph that can be saved with \code{ggave}. This shows the spacing of all of the plants.
 }
 \description{
 It is often needed to make minor changes (for dead plants etc.) to the output of \code{\link{MakeMainPlan}} using \code{PlotFieldPlan} is a good way to do that.
 }
 \examples{
-\dontrun{PlotFieldPlanAdvanced(MakeMainPlan(LETTERS[1:12], 1:3, 1:4), SZ = 5)}
-\dontrun{PlotFieldPlanAdvanced(MakeMainPlan(LETTERS[1:12], 1:3, 1:4), rowPlantSpacing = 1.5, colPlantSpacing = 0.5, colBlockSapcing = 1, colBlockFreq = 2, SZ = 5)}
-
+\dontrun{
+PlotFieldPlanAdvanced(MakeMainPlan(LETTERS[1:12], 1:3, 1:4), SZ = 5)
+#' PlotFieldPlanAdvanced(MakeMainPlan(LETTERS[1:12], 1:3, 1:4), rowPlantSpacing = 1.5, colPlantSpacing = 0.5, colBlockSapcing = 1, colBlockFreq = 2, SZ = 5)
+PlotFieldPlanAdvanced(MakeMainPlan(LETTERS[1:12], 1:3, 1:4),colBlockFreq = 2, SZ = 5, PlantPos = F)
+}
 }

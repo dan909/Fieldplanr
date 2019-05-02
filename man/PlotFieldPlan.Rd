@@ -10,13 +10,13 @@ PlotFieldPlan(List, DefaultCols = c(`Mb 311` = "#000000"), SZ = 1.5,
 \arguments{
 \item{List}{Is the dater frame output from \code{\link{MakeMainPlan}} or something with the same hasders.}
 
-\item{DefaultCols}{Are a list of key value pair sets for any pre-defigned colurs to use.}
+\item{DefaultCols}{Are a list of key value pair sets for any pre-defined colours to use.}
 
-\item{SZ}{Is the text sise in the graph this defalts to 1.5 but can be adjusted for large and small field plans.}
+\item{SZ}{Is the text size in the graph this defaults to 1.5 but can be adjusted for large and small field plans.}
 
-\item{TD}{This alows the text in the field plan to be rotated by n degrees (default = 0).}
+\item{TD}{This allows the text in the field plan to be rotated by n degrees (default = 0).}
 
-\item{Label}{The type of labeling to do on the plan. This can be nane/genotype ('geno'), plot number ('number'), location eg. 2-3 ('loc'),  just a dot ('plant'), or the UID/number of the plant ('UID').}
+\item{Label}{The type of labelling to do on the plan. This can be name/genotype ('geno'), plot number ('number'), location eg. 2-3 ('loc'), just a dot ('plant'), or the UID/number of the plant ('UID').}
 
 \item{FlipR}{This flips the rows (default = FALSE).}
 }

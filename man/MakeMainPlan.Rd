@@ -10,9 +10,9 @@ MakeMainPlan(xopplist, rowse, colse, nr = 1, nc = 1, zigzag = "R",
 \arguments{
 \item{xopplist}{is the name of the genotype clone etc.}
 
-\item{rowse}{the columns in the field n:n eg 1 to 7 (1:7) or 1 to 5 (1:5). This should normaly start at 1.}
+\item{rowse}{the columns in the field n:n e.g. 1 to 7 (1:7) or 1 to 5 (1:5). This should typically start at 1.}
 
-\item{colse}{The rows in the field n:n eg 1 to 5 (1:5) or 1 to 6 (1:6).  This should normaly start at 1.}
+\item{colse}{The rows in the field n:n eg 1 to 5 (1:5) or 1 to 6 (1:6).  This should typically start at 1.}
 
 \item{nr}{The number of rows in the sub plots.}
 
@@ -31,10 +31,10 @@ MakeMainPlan(xopplist, rowse, colse, nr = 1, nc = 1, zigzag = "R",
 \item{UID}{The UID for the first plant.}
 }
 \value{
-A list of the posishons of the plants \code{xopp} in the \code{colse} and \code{rowse} starting at \code{ori} and zig-zaging according to \code{zz}.
+A list of the posishons of the plants \code{xopp} in the \code{colse} and \code{rowse} starting at \code{ori} and zig-zagging according to \code{zz}.
 }
 \description{
-These can include subplots, in doing so this will call \code{\link{MakeSubPlan}} to make the subplots. Any sub plots can have difering zig-zags and origins dfinde in \code{zz} is called by \code{ori}.
+These can include subplots, in doing so this will call \code{\link{MakeSubPlan}} to make the subplots. Any sub plots can have differing zig-zags and origins defined in \code{zz} is called by \code{ori}.
 }
 \examples{
 MakeMainPlan(LETTERS[1:12],1:2,1:6,1,1)
