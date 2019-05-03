@@ -14,11 +14,17 @@ loadNamespace("ggplot2")
 #' @return A \code{ggplot2} heatmap style graph that can be saved with  \code{ggave}.
 #'
 #' @examples
-#' \dontrun{PlotFieldPlan(MakeMainPlan(LETTERS[1:12], 1:3, 1:4), SZ = 5)}
-#' \dontrun{PlotFieldPlan(MakeMainPlan(LETTERS[1:12], 1:3, 1:4,2,3), SZ = 3)}
-#' \dontrun{PlotFieldPlan(MakeMainPlan(LETTERS[1:12], 1:3, 1:4,2,3), SZ = 3, TD = 90, Label ='number')}
-#' \dontrun{PlotFieldPlan(MakeMainPlan(LETTERS[1:12], 1:3, 1:4,2,3), DefaultCols = c("A" = "red", "B" = "green", "C" = "blue"), SZ = 3)}
-#' \dontrun{PlotFieldPlan(MakeMainPlan(LETTERS[1:14], 1:3, 1:5,2,3), DefaultCols = c("A" = "red", "B" = "green", "C" = "blue"), SZ = 3, Label ='UID')}
+#' \dontrun{
+#' PlotFieldPlan(MakeMainPlan(LETTERS[1:12], 1:3, 1:4), SZ = 5)
+#'
+#' PlotFieldPlan(MakeMainPlan(LETTERS[1:12], 1:3, 1:4,2,3), SZ = 3)
+#'
+#' PlotFieldPlan(MakeMainPlan(LETTERS[1:12], 1:3, 1:4,2,3), SZ = 3, TD = 90, Label ='number')
+#'
+#' PlotFieldPlan(MakeMainPlan(LETTERS[1:12], 1:3, 1:4,2,3), DefaultCols = c("A" = "red", "B" = "green", "C" = "blue"), SZ = 3)
+#'
+#' PlotFieldPlan(MakeMainPlan(LETTERS[1:14], 1:3, 1:5,2,3), DefaultCols = c("A" = "red", "B" = "green", "C" = "blue"), SZ = 3, Label ='UID')
+#' }
 #'
 #' @export
 
@@ -33,18 +39,6 @@ PlotFieldPlan <- function(List, DefaultCols = c("Mb 311" = "#000000"), SZ=1.5, T
    if(!Label %in% c("geno", "number", "no", "loc", 'plant', 'uid')) {stop("Not a valid Label")}
 
    require(ggplot2)
-
-   ColMaker <- function(genos, SetControl = c("Mb 311" = "#000000")) {
-
-      for(i in unique(genos)) {
-         if(!(i %in% names(SetControl))) {
-            Col = paste0("#",paste(as.hexmode(round(runif(3,20,240),0)), collapse = ""))
-            names(Col) <- i
-            SetControl = c(SetControl, Col)
-         }
-      }
-      return(SetControl)
-   }
 
    P <- ggplot(X,aes(col,row, fill = geno)) + theme_bw() +
       geom_tile(show.legend = F) + scale_fill_manual(values = ColMaker(X$geno, DefaultCols))
@@ -94,8 +88,12 @@ PlotFieldPlan <- function(List, DefaultCols = c("Mb 311" = "#000000"), SZ=1.5, T
 #' @examples
 #' \dontrun{
 #' PlotFieldPlanAdvanced(MakeMainPlan(LETTERS[1:12], 1:3, 1:4), SZ = 5)
-#' #' PlotFieldPlanAdvanced(MakeMainPlan(LETTERS[1:12], 1:3, 1:4), rowPlantSpacing = 1.5, colPlantSpacing = 0.5, colBlockSapcing = 1, colBlockFreq = 2, SZ = 5)
+#'
+#' PlotFieldPlanAdvanced(MakeMainPlan(LETTERS[1:12], 1:3, 1:4), rowPlantSpacing = 1.5, colPlantSpacing = 0.5, colBlockSapcing = 1, colBlockFreq = 2, SZ = 5)
+#'
 #' PlotFieldPlanAdvanced(MakeMainPlan(LETTERS[1:12], 1:3, 1:4),colBlockFreq = 2, SZ = 5, PlantPos = F)
+#'
+#' PlotFieldPlanAdvanced(MakeMainPlan(c(LETTERS[1:12],LETTERS[1:4]), 1:4, 1:4), colPlantSpacing = c(2,1,1,2), rowPlantSpacing = c(2,1,1,2), colBlockFreq = 2, SZ = 5, PlantPos = F)
 #'}
 #' @export
 
@@ -106,44 +104,8 @@ PlotFieldPlanAdvanced <- function(List, rowPlantSpacing = 0.66, colPlantSpacing 
    X$row <- as.numeric(as.character(X$row))
    X$col <- as.numeric(as.character(X$col))
    X$geno[X$geno == "X"] <- NA
-
+   Cols <- ColMaker(X$geno, DefaultCols)
    require(ggplot2)
-
-   ColMaker <- function(genos, SetControl = c("Mb 311" = "#000000")) {
-
-      for(i in unique(genos)) {
-         if(!(i %in% names(SetControl))) {
-            Col = paste0("#",paste(as.hexmode(round(runif(3,20,240),0)), collapse = ""))
-            names(Col) <- i
-            SetControl = c(SetControl, Col)
-         }
-      }
-      return(SetControl)
-   }
-
-
-   MakeSpace <- function(pos, BlockFreq, BlockSapcing, PlantSpacing) {
-      if(length(PlantSpacing)>1){
-         ps <- PlantSpacing[pos]
-         Space <- sum(PlantSpacing[1:pos])
-      } else {
-         ps <- PlantSpacing
-         Space <- pos*PlantSpacing
-      }
-
-
-      if(length(BlockSapcing)==1) {
-         if(pos > BlockFreq) {Space <- Space + (floor((pos-1)/BlockFreq)*BlockSapcing)}
-      } else {
-         if(pos > BlockFreq) {
-            BlockSapce <- BlockSapcing[1:floor((pos-1)/BlockFreq)]
-            Space <- Space + sum(BlockSapce)
-         }
-      }
-      Space <- Space-(ps/2)
-      return(Space)
-   }
-
 
 
    # make real spacings
@@ -178,20 +140,18 @@ PlotFieldPlanAdvanced <- function(List, rowPlantSpacing = 0.66, colPlantSpacing 
          theme(panel.grid.major.x = element_blank()) + geom_hline(yintercept = 0) +
          theme(panel.grid.major.y = element_blank()) + geom_vline(xintercept = 0)
 
-      Cols <- ColMaker(X$geno, DefaultCols)
       for(i in 1:nrow(X)) {
          P <- P + annotate("rect", xmin = ColSpacings[X$col[i]]-(colPlantSpacing[X$col[i]]/2),
                            xmax = ColSpacings[X$col[i]]+(colPlantSpacing[X$col[i]]/2),
                   ymin = RowSpacings[X$row[i]]-(rowPlantSpacing[X$row[i]]/2),
                   ymax = RowSpacings[X$row[i]]+(rowPlantSpacing[X$row[i]]/2),
                  alpha = .5, fill = Cols[X$geno[i]])
-         print(Cols[X$geno[i]])
       }
 
    } else {
       P <- P + geom_tile(show.legend = F) +
          geom_text(aes(label = geno), show.legend = F, size=SZ, angle=TD) +
-         scale_fill_manual(values = ColMaker(X$geno, DefaultCols)) + ylab("") + xlab("") +
+         scale_fill_manual(values = Cols) + ylab("") + xlab("") +
          theme(axis.text.x = element_text(angle=90, hjust=1)) +
          theme(panel.grid.major.x = element_blank()) + geom_hline(yintercept = 0) +
          theme(panel.grid.major.y = element_blank()) + geom_vline(xintercept = 0)
