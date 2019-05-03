@@ -23,7 +23,7 @@ loadNamespace("ggplot2")
 #'
 #' PlotFieldPlan(MakeMainPlan(LETTERS[1:12], 1:3, 1:4,2,3), DefaultCols = c("A" = "red", "B" = "green", "C" = "blue"), SZ = 3)
 #'
-#' PlotFieldPlan(MakeMainPlan(LETTERS[1:14], 1:3, 1:5,2,3), DefaultCols = c("A" = "red", "B" = "green", "C" = "blue"), SZ = 3, Label ='UID')
+#' PlotFieldPlan(MakeMainPlan(LETTERS[1:15], 1:3, 1:5,2,3), DefaultCols = c("A" = "red", "B" = "green", "C" = "blue"), SZ = 3, Label ='UID')
 #' }
 #'
 #' @export
@@ -71,8 +71,8 @@ PlotFieldPlan <- function(List, DefaultCols = c("Mb 311" = "#000000"), SZ=1.5, T
 #' It is often needed to make minor changes (for dead plants etc.) to the output of \code{\link{MakeMainPlan}} using \code{PlotFieldPlan} is a good way to do that.
 #'
 #' @param List Is the dater frame output from \code{\link{MakeMainPlan}} or something with the same handers.
-#' @param rowPlantSpacing Spacing typically in m between plants in each row.
-#' @param colPlantSpacing Spacing typically in m between plants in each column.
+#' @param rowPlantSpacing Spacing typically in m between plants in each row. This can be a list of all the spacings if they are complex.
+#' @param colPlantSpacing Spacing typically in m between plants in each column. This can be a list of all the spacings if they are complex.
 #' @param rowBlockSapcing If there are blocks this is the spacing between there rows. This can be a list if it is the same length as the number of expected row paths.
 #' @param colBlockSapcing If there are blocks this is the spacing between there columns. This can be a list if it is the same length as the number of expected column paths.
 #' @param rowBlockFreq There is a new block every n rows of plants.
@@ -91,9 +91,13 @@ PlotFieldPlan <- function(List, DefaultCols = c("Mb 311" = "#000000"), SZ=1.5, T
 #'
 #' PlotFieldPlanAdvanced(MakeMainPlan(LETTERS[1:12], 1:3, 1:4), rowPlantSpacing = 1.5, colPlantSpacing = 0.5, colBlockSapcing = 1, colBlockFreq = 2, SZ = 5)
 #'
-#' PlotFieldPlanAdvanced(MakeMainPlan(LETTERS[1:12], 1:3, 1:4),colBlockFreq = 2, SZ = 5, PlantPos = F)
+#' PlotFieldPlanAdvanced(MakeMainPlan(LETTERS[1:14], 1:4, 1:4, 2,2), rowPlantSpacing = 1.5, colPlantSpacing = 0.5, colBlockSapcing = 0.5, colBlockSapcing = 0.5, colBlockFreq = 2, rowBlockFreq = 2,  SZ = 5, PlantPos = F)
+#'
+#' PlotFieldPlanAdvanced(MakeMainPlan(LETTERS[1:12], 1:3, 1:4, 4, 4),rowBlockFreq = 4, colBlockSapcing = 0.5, colBlockFreq = 8, SZ = 5, PlantPos = F)
 #'
 #' PlotFieldPlanAdvanced(MakeMainPlan(c(LETTERS[1:12],LETTERS[1:4]), 1:4, 1:4), colPlantSpacing = c(2,1,1,2), rowPlantSpacing = c(2,1,1,2), colBlockFreq = 2, SZ = 5, PlantPos = F)
+#'
+#' PlotFieldPlanAdvanced(MakeMainPlan(c(LETTERS[1:12],LETTERS[1:4]), 1:4, 1:4, 2,2), colPlantSpacing = c(.5,.5,1,1,1,1,.5,.5), rowPlantSpacing = c(.5,.5,1,1,1,1,.5,.5), colBlockFreq = 2, SZ = 5, PlantPos = T)
 #'}
 #' @export
 
@@ -130,6 +134,9 @@ PlotFieldPlanAdvanced <- function(List, rowPlantSpacing = 0.66, colPlantSpacing 
    P <- ggplot(X,aes(Xpos,Ypos, fill = geno)) + theme_bw()
 
    if(length(rowPlantSpacing)>1 | length(colPlantSpacing)>1) {
+      if(length(rowPlantSpacing)==1) {rowPlantSpacing <- rep(rowPlantSpacing,max(X$row))}
+      if(length(colPlantSpacing)==1) {colPlantSpacing <- rep(colPlantSpacing,max(X$col))}
+
       RowLines <- c(RowSpacings-(rowPlantSpacing/2),RowSpacings+(rowPlantSpacing/2))
       ColLines <- c(ColSpacings-(colPlantSpacing/2),ColSpacings+(colPlantSpacing/2))
 

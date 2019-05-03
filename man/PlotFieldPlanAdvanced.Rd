@@ -13,9 +13,9 @@ PlotFieldPlanAdvanced(List, rowPlantSpacing = 0.66,
 \arguments{
 \item{List}{Is the dater frame output from \code{\link{MakeMainPlan}} or something with the same handers.}
 
-\item{rowPlantSpacing}{Spacing typically in m between plants in each row.}
+\item{rowPlantSpacing}{Spacing typically in m between plants in each row. This can be a list of all the spacings if they are complex.}
 
-\item{colPlantSpacing}{Spacing typically in m between plants in each column.}
+\item{colPlantSpacing}{Spacing typically in m between plants in each column. This can be a list of all the spacings if they are complex.}
 
 \item{rowBlockSapcing}{If there are blocks this is the spacing between there rows. This can be a list if it is the same length as the number of expected row paths.}
 
@@ -44,7 +44,15 @@ It is often needed to make minor changes (for dead plants etc.) to the output of
 \examples{
 \dontrun{
 PlotFieldPlanAdvanced(MakeMainPlan(LETTERS[1:12], 1:3, 1:4), SZ = 5)
-#' PlotFieldPlanAdvanced(MakeMainPlan(LETTERS[1:12], 1:3, 1:4), rowPlantSpacing = 1.5, colPlantSpacing = 0.5, colBlockSapcing = 1, colBlockFreq = 2, SZ = 5)
-PlotFieldPlanAdvanced(MakeMainPlan(LETTERS[1:12], 1:3, 1:4),colBlockFreq = 2, SZ = 5, PlantPos = F)
+
+PlotFieldPlanAdvanced(MakeMainPlan(LETTERS[1:12], 1:3, 1:4), rowPlantSpacing = 1.5, colPlantSpacing = 0.5, colBlockSapcing = 1, colBlockFreq = 2, SZ = 5)
+
+PlotFieldPlanAdvanced(MakeMainPlan(LETTERS[1:14], 1:4, 1:4, 2,2), rowPlantSpacing = 1.5, colPlantSpacing = 0.5, colBlockSapcing = 0.5, colBlockSapcing = 0.5, colBlockFreq = 2, rowBlockFreq = 2,  SZ = 5, PlantPos = F)
+
+PlotFieldPlanAdvanced(MakeMainPlan(LETTERS[1:12], 1:3, 1:4, 4, 4),rowBlockFreq = 4, colBlockSapcing = 0.5, colBlockFreq = 8, SZ = 5, PlantPos = F)
+
+PlotFieldPlanAdvanced(MakeMainPlan(c(LETTERS[1:12],LETTERS[1:4]), 1:4, 1:4), colPlantSpacing = c(2,1,1,2), rowPlantSpacing = c(2,1,1,2), colBlockFreq = 2, SZ = 5, PlantPos = F)
+
+PlotFieldPlanAdvanced(MakeMainPlan(c(LETTERS[1:12],LETTERS[1:4]), 1:4, 1:4, 2,2), colPlantSpacing = c(.5,.5,1,1,1,1,.5,.5), rowPlantSpacing = c(.5,.5,1,1,1,1,.5,.5), colBlockFreq = 2, SZ = 5, PlantPos = T)
 }
 }

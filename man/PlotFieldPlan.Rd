@@ -27,10 +27,16 @@ A \code{ggplot2} heatmap style graph that can be saved with  \code{ggave}.
 It is often needed to make minor changes (for dead plants etc.) to the output of \code{\link{MakeMainPlan}} using \code{PlotFieldPlan} is a good way to do that.
 }
 \examples{
-\dontrun{PlotFieldPlan(MakeMainPlan(LETTERS[1:12], 1:3, 1:4), SZ = 5)}
-\dontrun{PlotFieldPlan(MakeMainPlan(LETTERS[1:12], 1:3, 1:4,2,3), SZ = 3)}
-\dontrun{PlotFieldPlan(MakeMainPlan(LETTERS[1:12], 1:3, 1:4,2,3), SZ = 3, TD = 90, Label ='number')}
-\dontrun{PlotFieldPlan(MakeMainPlan(LETTERS[1:12], 1:3, 1:4,2,3), DefaultCols = c("A" = "red", "B" = "green", "C" = "blue"), SZ = 3)}
-\dontrun{PlotFieldPlan(MakeMainPlan(LETTERS[1:14], 1:3, 1:5,2,3), DefaultCols = c("A" = "red", "B" = "green", "C" = "blue"), SZ = 3, Label ='UID')}
+\dontrun{
+PlotFieldPlan(MakeMainPlan(LETTERS[1:12], 1:3, 1:4), SZ = 5)
+
+PlotFieldPlan(MakeMainPlan(LETTERS[1:12], 1:3, 1:4,2,3), SZ = 3)
+
+PlotFieldPlan(MakeMainPlan(LETTERS[1:12], 1:3, 1:4,2,3), SZ = 3, TD = 90, Label ='number')
+
+PlotFieldPlan(MakeMainPlan(LETTERS[1:12], 1:3, 1:4,2,3), DefaultCols = c("A" = "red", "B" = "green", "C" = "blue"), SZ = 3)
+
+PlotFieldPlan(MakeMainPlan(LETTERS[1:15], 1:3, 1:5,2,3), DefaultCols = c("A" = "red", "B" = "green", "C" = "blue"), SZ = 3, Label ='UID')
+}
 
 }
