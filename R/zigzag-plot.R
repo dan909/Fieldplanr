@@ -170,13 +170,24 @@ PlotFieldPlanAdvanced <- function(List, rowPlantSpacing = 0.66, colPlantSpacing 
    if(length(rowPlantSpacing)>1 | length(colPlantSpacing)>1) {
       RowLines <- c(RowSpacings-(rowPlantSpacing/2),RowSpacings+(rowPlantSpacing/2))
       ColLines <- c(ColSpacings-(colPlantSpacing/2),ColSpacings+(colPlantSpacing/2))
-      print(ColLines)
+
       P <- P + geom_text(aes(label = geno), show.legend = F, size=SZ, angle=TD) +
          ylab("") + xlab("") + geom_hline(yintercept = RowLines) +
          geom_vline(xintercept = ColLines) +
          theme(axis.text.x = element_text(angle=90, hjust=1)) +
          theme(panel.grid.major.x = element_blank()) + geom_hline(yintercept = 0) +
          theme(panel.grid.major.y = element_blank()) + geom_vline(xintercept = 0)
+
+      Cols <- ColMaker(X$geno, DefaultCols)
+      for(i in 1:nrow(X)) {
+         P <- P + annotate("rect", xmin = ColSpacings[X$col[i]]-(colPlantSpacing[X$col[i]]/2),
+                           xmax = ColSpacings[X$col[i]]+(colPlantSpacing[X$col[i]]/2),
+                  ymin = RowSpacings[X$row[i]]-(rowPlantSpacing[X$row[i]]/2),
+                  ymax = RowSpacings[X$row[i]]+(rowPlantSpacing[X$row[i]]/2),
+                 alpha = .5, fill = Cols[X$geno[i]])
+         print(Cols[X$geno[i]])
+      }
+
    } else {
       P <- P + geom_tile(show.legend = F) +
          geom_text(aes(label = geno), show.legend = F, size=SZ, angle=TD) +
