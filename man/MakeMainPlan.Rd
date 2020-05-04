@@ -4,8 +4,19 @@
 \alias{MakeMainPlan}
 \title{Makes a set of plots from a list of genotypes.}
 \usage{
-MakeMainPlan(xopplist, rowse, colse, nr = 1, nc = 1, zigzag = "R",
-  origin = "TL", zz = "R", ori = "TL", FlipR = F, UID = 1)
+MakeMainPlan(
+  xopplist,
+  rowse,
+  colse,
+  nr = 1,
+  nc = 1,
+  zigzag = "R",
+  origin = "TL",
+  zz = "R",
+  ori = "TL",
+  FlipR = F,
+  UID = 1
+)
 }
 \arguments{
 \item{xopplist}{is the name of the genotype clone etc.}

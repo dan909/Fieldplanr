@@ -58,3 +58,8 @@ MakeSpace <- function(pos, BlockFreq, BlockSapcing, PlantSpacing) {
    Space <- Space-(ps/2)
    return(Space)
 }
+
+
+
+
+

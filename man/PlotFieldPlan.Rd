@@ -4,8 +4,14 @@
 \alias{PlotFieldPlan}
 \title{Makes a basic diagram from the output of \code{\link{MakeMainPlan}}.}
 \usage{
-PlotFieldPlan(List, DefaultCols = c(`Mb 311` = "#000000"), SZ = 1.5,
-  TD = 0, Label = "geno", FlipR = FALSE)
+PlotFieldPlan(
+  List,
+  DefaultCols = c(`Mb 311` = "#000000"),
+  SZ = 1.5,
+  TD = 0,
+  Label = "geno",
+  FlipR = FALSE
+)
 }
 \arguments{
 \item{List}{Is the dater frame output from \code{\link{MakeMainPlan}} or something with the same hasders.}

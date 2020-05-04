@@ -4,11 +4,20 @@
 \alias{PlotFieldPlanAdvanced}
 \title{Makes a more advanced diagram from the output of \code{\link{MakeMainPlan}} that can show path spacing.}
 \usage{
-PlotFieldPlanAdvanced(List, rowPlantSpacing = 0.66,
-  colPlantSpacing = 0.75, rowBlockSapcing = 0.66,
-  colBlockSapcing = 0.75, rowBlockFreq = 15, colBlockFreq = 4,
-  DefaultCols = c(`Mb 311` = "#000000"), SZ = 1.5, TD = 0,
-  FlipR = FALSE, PlantPos = TRUE)
+PlotFieldPlanAdvanced(
+  List,
+  rowPlantSpacing = 0.66,
+  colPlantSpacing = 0.75,
+  rowBlockSapcing = 0.66,
+  colBlockSapcing = 0.75,
+  rowBlockFreq = 15,
+  colBlockFreq = 4,
+  DefaultCols = c(`Mb 311` = "#000000"),
+  SZ = 1.5,
+  TD = 0,
+  FlipR = FALSE,
+  PlantPos = TRUE
+)
 }
 \arguments{
 \item{List}{Is the dater frame output from \code{\link{MakeMainPlan}} or something with the same handers.}

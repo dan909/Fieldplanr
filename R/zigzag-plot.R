@@ -1,4 +1,5 @@
 loadNamespace("ggplot2")
+loadNamespace("openxlsx")
 
 #' Makes a basic diagram from the output of \code{\link{MakeMainPlan}}.
 #'
@@ -183,3 +184,82 @@ PlotFieldPlanAdvanced <- function(List, rowPlantSpacing = 0.66, colPlantSpacing 
    return(P)
 }
 
+
+
+#' Makes an excel plan of \code{\link{MakeMainPlan}}.
+#'
+#' It is often needed to discuss the field plan or for dead plants etc..
+#'
+#' @param List Is the dater frame output from \code{\link{MakeMainPlan}} or something with the same headers
+#' @param DefaultCols Are a list of key value pair sets for any pre-defined colours to use
+#' @param Label This is what is to be written on the Field Plan. Options are: 'geno' 'geno+UID' 'UID' 'geno+RC' 'RC'
+#' @param FieldName This is the name of the field the plan is for eg JKI-43.
+#' @param user The type of labelling to do on the plan. This can be name/genotype ('geno'), plot number ('number'), location eg. 2-3 ('loc'), just a dot ('plant'), or the UID/number of the plant ('UID').
+#' @param Book If there is allredy a workbook you want to add a sheat to put the object hear, it must be a openxlsx workbook
+#' @param Save This is if to save the xlsx file in the function
+#'
+#' @return openxlsx workbook
+#'
+#' @examples
+#' \dontrun{
+#' MakeExcelPlan(MakeMainPlan(LETTERS[1:12], 1:3, 1:4), Label = "geno", FieldName="TEST_Field", user="tester")
+#'
+#' MakeExcelPlan(MakeMainPlan(LETTERS[1:12], 1:3, 1:4,2,3), Label = "geno+UID", FieldName="TEST_Field", user="tester")
+#' }
+#'
+#' @export
+
+MakeExcelPlan <- function(List, DefaultCols = c("Mb 311" = "#000000"), Label = "geno", FieldName="Field", user="user", Book=NULL, Save=TRUE) {
+   List$geno <- as.character(List$geno)
+
+   require(openxlsx)
+   noROW <- max(List$ROW)
+   noCOLL <- max(List$COL)
+   norow <- max(List$row)
+   nocoll <- max(List$col)
+
+   rplots <- norow/noROW
+   cplots <- nocoll/noCOLL
+
+   if(is.null(Book)) {
+      Book <- openxlsx::createWorkbook(creator = user, title = FieldName, subject = FieldName, category = FieldName)
+   }
+   openxlsx::addWorksheet(Book, sheetName = FieldName, tabColour = "#5511FF")
+
+   Cols <- ColMaker(List$geno, DefaultCols)
+
+   R_STY <- createStyle(border = c("bottom"))
+   C_STY <- createStyle(border = c("right"))
+
+   for (i in 1:nrow(List)) {
+      Geno <- List$geno[i]
+      UID <- List$UID[i]
+      rw <- List$row[i]
+      cl <- List$col[i]
+
+      switch (Label,
+              "geno" = lableGeno <- paste0(Geno),
+              "geno+UID" = lableGeno <- paste0(Geno, " [", UID, "]"),
+              "UID" = lableGeno <- paste0(UID),
+              "geno+RC" = lableGeno <- paste0(Geno, " [R", rw, "-C", cl, "]"),
+              "RC" = lableGeno <- paste0("R", rw, "-C", cl)
+      )
+
+      openxlsx::writeData(Book, FieldName, x = lableGeno, xy = c(cl+1,rw+1))
+
+      STY <- createStyle(fgFill = unname(Cols[Geno]), wrapText = T, halign = 'center')
+
+
+      if ((rw %% rplots) == 0) {openxlsx::addStyle(Book, FieldName, R_STY, rows = rw+1, cols = cl+1, stack = T)}
+      if ((cl %% cplots) == 0) {openxlsx::addStyle(Book, FieldName, C_STY, rows = rw+1, cols = cl+1, stack = T)}
+
+      openxlsx::addStyle(Book, FieldName, STY, rows = rw+1, cols = cl+1, stack = T)
+   }
+
+
+   if (Save) {
+      openxlsx::saveWorkbook(Book, paste0(FieldName,".xlsx"), overwrite = T)
+   }
+
+   return(Book)
+}
