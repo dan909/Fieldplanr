@@ -23,7 +23,7 @@ MakeExcelPlan(
 
 \item{FieldName}{This is the name of the field the plan is for eg JKI-43.}
 
-\item{user}{The type of labelling to do on the plan. This can be name/genotype ('geno'), plot number ('number'), location eg. 2-3 ('loc'), just a dot ('plant'), or the UID/number of the plant ('UID').}
+\item{user}{Name of the user}
 
 \item{Book}{If there is allredy a workbook you want to add a sheat to put the object hear, it must be a openxlsx workbook}
 

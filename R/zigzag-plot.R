@@ -194,7 +194,7 @@ PlotFieldPlanAdvanced <- function(List, rowPlantSpacing = 0.66, colPlantSpacing 
 #' @param DefaultCols Are a list of key value pair sets for any pre-defined colours to use
 #' @param Label This is what is to be written on the Field Plan. Options are: 'geno' 'geno+UID' 'UID' 'geno+RC' 'RC'
 #' @param FieldName This is the name of the field the plan is for eg JKI-43.
-#' @param user The type of labelling to do on the plan. This can be name/genotype ('geno'), plot number ('number'), location eg. 2-3 ('loc'), just a dot ('plant'), or the UID/number of the plant ('UID').
+#' @param user Name of the user
 #' @param Book If there is allredy a workbook you want to add a sheat to put the object hear, it must be a openxlsx workbook
 #' @param Save This is if to save the xlsx file in the function
 #'
