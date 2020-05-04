@@ -20,5 +20,4 @@ The plans need each plot coloured by genotype
 \examples{
 ColMaker(LETTERS[1:12])
 
-
 }

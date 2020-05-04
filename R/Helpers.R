@@ -10,7 +10,7 @@
 #' @examples
 #' ColMaker(LETTERS[1:12])
 #'
-#'
+#' @export
 ColMaker <- function(genos, SetControl = c("Mb 311" = "#000000")) {
 
    for(i in unique(genos)) {
@@ -37,6 +37,7 @@ ColMaker <- function(genos, SetControl = c("Mb 311" = "#000000")) {
 #' @examples
 #' MakeSpace(3,2,1,0.66)
 #'
+#' @export
 MakeSpace <- function(pos, BlockFreq, BlockSapcing, PlantSpacing) {
    if(length(PlantSpacing)>1){
       ps <- PlantSpacing[pos]

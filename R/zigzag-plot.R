@@ -200,16 +200,10 @@ PlotFieldPlanAdvanced <- function(List, rowPlantSpacing = 0.66, colPlantSpacing 
 #'
 #' @return openxlsx workbook
 #'
-#' @examples
-#' \dontrun{
-#' MakeExcelPlan(MakeMainPlan(LETTERS[1:12], 1:3, 1:4), Label = "geno", FieldName="TEST_Field", user="tester")
-#'
-#' MakeExcelPlan(MakeMainPlan(LETTERS[1:12], 1:3, 1:4,2,3), Label = "geno+UID", FieldName="TEST_Field", user="tester")
-#' }
 #'
 #' @export
 
-MakeExcelPlan <- function(List, DefaultCols = c("Mb 311" = "#000000"), Label = "geno", FieldName="Field", user="user", Book=NULL, Save=TRUE) {
+MakeExcelPlan <- function(List, DefaultCols = c("Mb 311" = "#000000"), Label = "geno", FieldName="Field", user="user", Book=NULL, Save=FALSE) {
    List$geno <- as.character(List$geno)
 
    require(openxlsx)

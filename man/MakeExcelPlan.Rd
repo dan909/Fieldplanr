@@ -11,7 +11,7 @@ MakeExcelPlan(
   FieldName = "Field",
   user = "user",
   Book = NULL,
-  Save = TRUE
+  Save = FALSE
 )
 }
 \arguments{
@@ -34,12 +34,4 @@ openxlsx workbook
 }
 \description{
 It is often needed to discuss the field plan or for dead plants etc..
-}
-\examples{
-\dontrun{
-MakeExcelPlan(MakeMainPlan(LETTERS[1:12], 1:3, 1:4), Label = "geno", FieldName="TEST_Field", user="tester")
-
-MakeExcelPlan(MakeMainPlan(LETTERS[1:12], 1:3, 1:4,2,3), Label = "geno+UID", FieldName="TEST_Field", user="tester")
-}
-
 }
